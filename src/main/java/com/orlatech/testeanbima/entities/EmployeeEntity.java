@@ -3,6 +3,7 @@ package com.orlatech.testeanbima.entities;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Pattern;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -11,6 +12,8 @@ import lombok.NoArgsConstructor;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 import org.hibernate.validator.constraints.br.CPF;
+
+import com.orlatech.testeanbima.dtos.EmployeeCreateDTO;
 
 import java.time.LocalDateTime;
 import java.util.UUID;
@@ -23,7 +26,7 @@ import java.util.UUID;
 public class EmployeeEntity {
 
     @Id
-    @GeneratedValue(strategy =  GenerationType.UUID)
+    @GeneratedValue(strategy = GenerationType.UUID)
     private UUID id;
 
     @NotBlank(message = "O Nome não pode estar vazio")
@@ -40,7 +43,7 @@ public class EmployeeEntity {
     private String cpf;
 
     @Column(nullable = false, unique = false)
-    @NotBlank(message = "O salário não pode estar vazio")
+    @NotNull(message = "O salário não pode estar vazio")
     private Double salary;
 
     @CreationTimestamp
@@ -48,4 +51,12 @@ public class EmployeeEntity {
 
     @UpdateTimestamp
     private LocalDateTime updateAt;
+
+    public EmployeeEntity(EmployeeCreateDTO data) {
+        this.name = data.getName();
+        ;
+        this.email = data.getEmail();
+        this.cpf = data.getCpf();
+        this.salary = data.getSalary();
+    }
 }

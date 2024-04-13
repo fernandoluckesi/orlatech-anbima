@@ -10,7 +10,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
 import java.util.UUID;
+import java.util.stream.Collectors;
 
 @Service
 public class EmployeeService {
@@ -48,5 +50,16 @@ public class EmployeeService {
         EmployeeResponseDTO employeeResponseDTO = new EmployeeResponseDTO(employee);
 
         return employeeResponseDTO;
+    }
+
+    public List<EmployeeResponseDTO> getAll() {
+
+        List<EmployeeEntity> employees = this.employeesRepository.findAll();
+
+        List<EmployeeResponseDTO> employeeResponseDTOs = employees.stream()
+                .map(EmployeeResponseDTO::new)
+                .collect(Collectors.toList());
+
+        return employeeResponseDTOs;
     }
 }

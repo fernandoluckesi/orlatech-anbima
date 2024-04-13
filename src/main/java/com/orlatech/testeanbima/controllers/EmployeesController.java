@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.List;
 import java.util.UUID;
 
 @RestController
@@ -36,5 +37,12 @@ public class EmployeesController {
         EmployeeResponseDTO employee = this.employeeService.getById(id);
 
         return ResponseEntity.ok().body(employee);
+    }
+
+    @GetMapping
+    public ResponseEntity<List<EmployeeResponseDTO>> getAll() {
+        var employees = this.employeeService.getAll();
+
+        return ResponseEntity.ok().body(employees);
     }
 }

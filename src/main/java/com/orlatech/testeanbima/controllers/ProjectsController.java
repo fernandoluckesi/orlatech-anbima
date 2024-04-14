@@ -41,8 +41,10 @@ public class ProjectsController {
         var projectWithEmployeeAdded = this.projectService.addEmployee(addEmployeeInProjectDTO.getProjectId(),
                 addEmployeeInProjectDTO.getEmployeeCpf());
 
-        return ResponseEntity.created((java.net.URI.create("/project" + projectWithEmployeeAdded.getId())))
-                .body(projectWithEmployeeAdded);
+        ProjectResponseDTO projectResponseDTO = new ProjectResponseDTO(projectWithEmployeeAdded);
+
+        return ResponseEntity.created((java.net.URI.create("/project" + projectResponseDTO.getId())))
+                .body(projectResponseDTO);
     }
 
     @PostMapping("/remove-employee")
@@ -50,8 +52,10 @@ public class ProjectsController {
         var projectWithEmployeeRemoved = this.projectService.removeEmployee(addEmployeeInProjectDTO.getProjectId(),
                 addEmployeeInProjectDTO.getEmployeeCpf());
 
-        return ResponseEntity.created((java.net.URI.create("/project" + projectWithEmployeeRemoved.getId())))
-                .body(projectWithEmployeeRemoved);
+        ProjectResponseDTO projectResponseDTO = new ProjectResponseDTO(projectWithEmployeeRemoved);
+
+        return ResponseEntity.created((java.net.URI.create("/project" + projectResponseDTO.getId())))
+                .body(projectResponseDTO);
     }
 
     @GetMapping("/{id}")

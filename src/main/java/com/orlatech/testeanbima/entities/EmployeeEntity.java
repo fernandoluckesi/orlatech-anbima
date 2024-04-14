@@ -55,7 +55,6 @@ public class EmployeeEntity {
     private LocalDateTime updateAt;
 
     @ManyToMany(mappedBy = "employees")
-    @JsonIgnore
     private List<ProjectEntity> projects;
 
     public EmployeeEntity(EmployeeCreateDTO data) {

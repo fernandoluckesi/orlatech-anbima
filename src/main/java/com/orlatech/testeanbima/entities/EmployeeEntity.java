@@ -13,9 +13,11 @@ import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 import org.hibernate.validator.constraints.br.CPF;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.orlatech.testeanbima.dtos.EmployeeCreateDTO;
 
 import java.time.LocalDateTime;
+import java.util.List;
 import java.util.UUID;
 
 @Entity(name = "employees")
@@ -51,6 +53,10 @@ public class EmployeeEntity {
 
     @UpdateTimestamp
     private LocalDateTime updateAt;
+
+    @ManyToMany(mappedBy = "employees")
+    @JsonIgnore
+    private List<ProjectEntity> projects;
 
     public EmployeeEntity(EmployeeCreateDTO data) {
         this.name = data.getName();

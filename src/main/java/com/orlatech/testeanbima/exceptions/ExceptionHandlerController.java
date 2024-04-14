@@ -9,16 +9,10 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 
 import com.orlatech.testeanbima.dtos.ApiError;
 
-import lombok.Builder;
-
 @ControllerAdvice
-@Builder
 public class ExceptionHandlerController {
 
-  private MessageSource messageSource;
-
   public ExceptionHandlerController(MessageSource messageSource) {
-    this.messageSource = messageSource;
   }
 
   @ExceptionHandler(ValidationExceptionBadRequest.class)

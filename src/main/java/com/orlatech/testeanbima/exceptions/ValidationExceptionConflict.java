@@ -7,8 +7,8 @@ import lombok.Setter;
 @Setter
 public class ValidationExceptionConflict extends ValidationException {
 
-  public ValidationExceptionConflict(String httpStatusName, String mensagem, int httpStatusNumber) {
-    super(httpStatusName, mensagem, httpStatusNumber);
+  public ValidationExceptionConflict(String httpStatusName, String message, int httpStatusNumber) {
+    super(httpStatusName, message, httpStatusNumber);
   }
 
 }

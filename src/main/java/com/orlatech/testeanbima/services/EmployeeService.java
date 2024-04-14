@@ -17,49 +17,50 @@ import java.util.stream.Collectors;
 @Service
 public class EmployeeService {
 
-    @Autowired
-    private EmployeesRepository employeesRepository;
+        @Autowired
+        private EmployeesRepository employeesRepository;
 
-    public EmployeeEntity create(EmployeeCreateDTO employeeCreateDTO) {
+        public EmployeeEntity create(EmployeeCreateDTO employeeCreateDTO) {
 
-        this.employeesRepository.findByEmail(employeeCreateDTO.getEmail())
-                .ifPresent((user) -> {
-                    throw new ValidationExceptionConflict(HttpStatus.CONFLICT.name(),
-                            "Funcionário já cadastrado com esse e-mail",
-                            HttpStatus.CONFLICT.value());
-                });
+                this.employeesRepository.findByEmail(employeeCreateDTO.getEmail())
+                                .ifPresent((employee) -> {
+                                        throw new ValidationExceptionConflict(HttpStatus.CONFLICT.name(),
+                                                        "Funcionário já cadastrado com esse e-mail",
+                                                        HttpStatus.CONFLICT.value());
+                                });
 
-        this.employeesRepository.findByCpf(employeeCreateDTO.getCpf())
-                .ifPresent((user) -> {
-                    throw new ValidationExceptionConflict(HttpStatus.CONFLICT.name(),
-                            "Funcionário já cadastrado com esse cpf",
-                            HttpStatus.CONFLICT.value());
-                });
+                this.employeesRepository.findByCpf(employeeCreateDTO.getCpf())
+                                .ifPresent((employee) -> {
+                                        throw new ValidationExceptionConflict(HttpStatus.CONFLICT.name(),
+                                                        "Funcionário já cadastrado com esse cpf",
+                                                        HttpStatus.CONFLICT.value());
+                                });
 
-        EmployeeEntity employee = new EmployeeEntity(employeeCreateDTO);
+                EmployeeEntity employee = new EmployeeEntity(employeeCreateDTO);
 
-        return this.employeesRepository.save(employee);
-    }
+                return this.employeesRepository.save(employee);
+        }
 
-    public EmployeeResponseDTO getById(UUID id) {
-        EmployeeEntity employee = this.employeesRepository.findById(id)
-                .orElseThrow(
-                        () -> new ValidationExceptionNotFound(HttpStatus.NOT_FOUND.name(), "Funcionário não encontrado",
-                                HttpStatus.NOT_FOUND.value()));
+        public EmployeeResponseDTO getById(UUID id) {
+                EmployeeEntity employee = this.employeesRepository.findById(id)
+                                .orElseThrow(
+                                                () -> new ValidationExceptionNotFound(HttpStatus.NOT_FOUND.name(),
+                                                                "Funcionário não encontrado",
+                                                                HttpStatus.NOT_FOUND.value()));
 
-        EmployeeResponseDTO employeeResponseDTO = new EmployeeResponseDTO(employee);
+                EmployeeResponseDTO employeeResponseDTO = new EmployeeResponseDTO(employee);
 
-        return employeeResponseDTO;
-    }
+                return employeeResponseDTO;
+        }
 
-    public List<EmployeeResponseDTO> getAll() {
+        public List<EmployeeResponseDTO> getAll() {
 
-        List<EmployeeEntity> employees = this.employeesRepository.findAll();
+                List<EmployeeEntity> employees = this.employeesRepository.findAll();
 
-        List<EmployeeResponseDTO> employeeResponseDTOs = employees.stream()
-                .map(EmployeeResponseDTO::new)
-                .collect(Collectors.toList());
+                List<EmployeeResponseDTO> employeeResponseDTOs = employees.stream()
+                                .map(EmployeeResponseDTO::new)
+                                .collect(Collectors.toList());
 
-        return employeeResponseDTOs;
-    }
+                return employeeResponseDTOs;
+        }
 }

@@ -123,7 +123,7 @@ public class EmployeeControllerTest {
         mockMvc.perform(post("/employees")
                 .contentType(MediaType.APPLICATION_JSON)
                 .content(
-                        "{\"name\":\"João Silva\",\"email\":\"joao.silva@example.com\",\"cpf\":\"42275937862\",\"position\":\"Desenvolvedor\"}"))
+                        "{\"name\":\"João Silva\",\"email\":\"joao.silva@example.com\",\"cpf\":\"42275937862\",\"salary\":9000.00}"))
                 .andExpect(status().isCreated());
 
         verify(employeeService, times(1)).create(any(EmployeeCreateDTO.class));

@@ -16,7 +16,6 @@ import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.header;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 
 import static org.hamcrest.Matchers.hasSize;
@@ -25,16 +24,10 @@ import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 import static org.mockito.ArgumentMatchers.any;
 
-import com.fasterxml.jackson.databind.ObjectMapper;
-import com.orlatech.testeanbima.dtos.EmployeeCreateDTO;
 import com.orlatech.testeanbima.dtos.EmployeeInProjectResponseDTO;
-import com.orlatech.testeanbima.dtos.EmployeeResponseDTO;
 import com.orlatech.testeanbima.dtos.ProjectCreateDTO;
-import com.orlatech.testeanbima.dtos.ProjectInEmployeeResponseDTO;
 import com.orlatech.testeanbima.dtos.ProjectResponseDTO;
-import com.orlatech.testeanbima.entities.EmployeeEntity;
 import com.orlatech.testeanbima.entities.ProjectEntity;
-import com.orlatech.testeanbima.services.EmployeeService;
 import com.orlatech.testeanbima.services.ProjectService;
 
 @SpringBootTest
@@ -46,9 +39,6 @@ public class ProjectControllerTest {
 
         @MockBean
         private ProjectService projectService;
-
-        @Autowired
-        private ObjectMapper objectMapper;
 
         @Test
         void shouldReturnAllProjects() throws Exception {

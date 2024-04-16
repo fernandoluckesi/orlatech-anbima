@@ -17,7 +17,7 @@ Aqui neste README não irei detalhar cada rota da API pois já existe uma docume
 
 # Objetivo do projeto
 
-O projeto**Projeto Teste Anbima e Orlatech** tem como objetivo demonstrar minhas seguintes habilidades como Desenvolvedor de Software com ênfase no back-end:
+O projeto **Teste Anbima e Orlatech** tem como objetivo demonstrar minhas seguintes habilidades como Desenvolvedor de Software com ênfase no back-end:
 
 - Programação orientada a objetos (POO)
 - Java
